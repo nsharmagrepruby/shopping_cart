@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def check_authorization_user
-    debugger
     if params[:user_id].to_i != session[:user_id]
       redirect_to root_path
     end

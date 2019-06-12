@@ -1,4 +1,4 @@
-<p id=”alert”><%= alert %></p>
+<p id='alert'><%= alert %></p>
 <h1>Login</h1>
   <%= form_with model: @user, url: sessions_path, local: true do |form| %>
     <p>
@@ -10,5 +10,5 @@
     <%= form.label :password %>
     <%= form.password_field :password %>
     </p>
-    <%= form.submit %>
+    <%= form.submit 'login' %>
 <% end %>

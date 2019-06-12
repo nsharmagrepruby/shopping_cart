@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
  
-  resources :users, only: [:create, :new, :edit, :show, :update, :destroy] do
-    resources :addresses
+  resources :users, only: [:create, :new, :edit, :show, :update] do
+    resources :addresses, :products
   end
   resources :sessions, only: [:new, :create, :destroy]
 end
