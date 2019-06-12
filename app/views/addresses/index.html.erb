@@ -1,0 +1,22 @@
+Your Addresses are :
+<table border="1">
+  <tr>
+    <th>house_num</th>
+    <th>area</th>
+    <th>city</th>
+  </tr>
+
+  <% @user.addresses.each do |address| %>
+    <tr>
+      <td><%= address.house_num %></td>
+      <td><%= address.area %></td>
+      <td><%= address.city %></td>
+      <td><%= link_to 'edit address', edit_user_address_path(@user, address) %> </td>
+      <td><%= link_to 'delete', user_address_path(@user, address),
+      method: :delete,
+              data: { confirm: 'Are you sure?' }  %> </td>
+      
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'User home', user_path(current_user) %>

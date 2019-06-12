@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'welcome#index'
-  resources :users, only: [:create, :new, :edit, :show, :update, :destroy]
-  resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
+
+  root 'welcome#index'
+ 
+  resources :users, only: [:create, :new, :edit, :show, :update, :destroy] do
+    resources :addresses
+  end
+  resources :sessions, only: [:new, :create, :destroy]
 end

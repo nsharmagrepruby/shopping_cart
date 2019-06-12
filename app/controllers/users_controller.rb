@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+  
   def index
     redirect_if_user_login
   end

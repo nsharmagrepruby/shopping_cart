@@ -1,0 +1,17 @@
+<%= form_with(model: [ @user, @address], local: true) do |form| %>
+  <p>
+    <%= form.label :house_num %><br>
+    <%= form.text_field :house_num %>
+  </p>
+  <p>
+    <%= form.label :area %><br>
+    <%= form.text_field :area %>
+  </p>
+  <p>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %>
+  </p>
+
+    <%= form.submit %>
+  </p>
+<% end %>
