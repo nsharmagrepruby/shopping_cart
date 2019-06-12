@@ -9,6 +9,8 @@
   <br>
   <%= link_to 'Update User profile', edit_user_path(current_user) %>
   <br>
+  <%= link_to 'Show all product', user_products_path(current_user) %>
+  <br>
 
 <% else %>
   <%= link_to 'Sign Up', signup_path %> or 
