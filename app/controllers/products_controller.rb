@@ -1,24 +1,43 @@
 class ProductsController < ApplicationController
+  before_action :check_authorization_user
  
   def index
     @products = Product.all
-    render @products
   end
   
   def new
+    redirect_to user_products_path unless shop_owner.present?
     @product = Product.new
-    shop_owner = ShopOwner.find_by_user_id(current_user.id)
-    session[:shop_id] = shop_owner.shop_id
-    session[:shop_owner_id] = shop_owner.id
+  end
+
+  def show
+    @products = Product.where(:shop_owner_id => shop_owner.id)
   end
 
   def create
-    @shop_owner = ShopOwner.find_by_user_id(current_user.id)
-    render plain: params[:product].inspect
+    @product = Product.new(product_params.merge(get_shop_and_owner_param))
+    if @product.save
+      render plain: params[:product].inspect
+    else 
+      render 'new'
+    end
   end
 
   private
   def product_params
     params.require(:product).permit(:name, :description, :price, :quantity)
   end
+
+  def shop_owner
+    current_user.shop_owner
+  end
+
+  def shop
+    current_user.shop_owner.shop
+  end
+
+  def get_shop_and_owner_param
+    return { shop_owner_id: shop_owner.id, shop_id: shop.id }
+  end
 end
+

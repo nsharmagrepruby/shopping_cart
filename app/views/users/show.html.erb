@@ -1,6 +1,7 @@
 <% if current_user %>
   Logged in as <%= current_user.email %>.
   <%= current_user.id %>
+  <br>
   <%= link_to 'create Address', new_user_address_path(current_user)  %>
   <br>
   <%= link_to 'show all Address', user_addresses_path(current_user) %>
@@ -9,7 +10,14 @@
   <br>
   <%= link_to 'Update User profile', edit_user_path(current_user) %>
   <br>
-  <%= link_to 'Show all product', user_products_path(current_user) %>
+  <%= link_to 'Show all user_products', user_products_path(current_user) %>
+  <br>
+  
+  <% if current_user.shop_owner.present? %>
+    <%= link_to 'create  product', new_user_product_path(current_user) %>
+    <br>
+    <%= link_to 'Show product of your shop', user_products_path(current_user) %> 
+  <% end %>
   <br>
 
 <% else %>

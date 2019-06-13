@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_secure_password
   has_many :addresses
   has_one :role
+  has_one :shop_owner
 end
