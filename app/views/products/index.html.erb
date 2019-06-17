@@ -16,7 +16,7 @@
         <%= form_with model: @cart_product, url: user_carts_path ,local: true do |form|  %>
         <%= form.label :quantity %><br>
         <%= form.number_field :quantity %>
-        <%= form.hidden_field :products_id, value: product.id %>
+        <%= form.hidden_field :product_id, value: product.id %>
         <%= form.submit "add to cart" %>
         <% end %>
       </th>

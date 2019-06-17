@@ -1,0 +1,23 @@
+Cart For
+<%= current_user.first_name %>
+<%= current_user.last_name %>
+<table border="1">
+  <tr> 
+    <th>Name</th>
+    <th>Description</th>
+    <th>price</th>
+    <th>Quantity</th>
+  </tr>
+  <% @cart.cart_products.each do |cart_product|%>
+    <tr>
+      <td><%= cart_product.product.name %></td>
+      <td><%= cart_product.product.description %></td>
+      <td><%= cart_product.product.price %></td>
+      <td><%= cart_product.quantity %></td>
+      <td><%= link_to 'edit product',  edit_user_cart_product_path(current_user, cart_product) %> </td>
+      <td><%= link_to 'delete product',  user_cart_product_path(current_user, cart_product), method: :delete, data: { confirm: 'Are you sure?' }  %> 
+      </td>
+      
+  <% end %>
+  <%= link_to 'Confrim order', user_orders_path(current_user), method: :post %> 
+</table>
