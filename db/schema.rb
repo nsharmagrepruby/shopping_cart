@@ -10,16 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_112813) do
+ActiveRecord::Schema.define(version: 2019_06_17_094721) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string "house_num"
+    t.string "house_number"
     t.string "area"
     t.string "city"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "cart_products", force: :cascade do |t|
+    t.integer "cart_id"
+    t.integer "product_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_prodcuts_on_cart_id"
+    t.index ["product_id"], name: "index_cart_prodcuts_on_product_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -33,14 +50,6 @@ ActiveRecord::Schema.define(version: 2019_06_12_112813) do
     t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_products_on_shop_id"
     t.index ["shop_owner_id"], name: "index_products_on_shop_owner_id"
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string "role_type"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_roles_on_user_id"
   end
 
   create_table "shop_owners", force: :cascade do |t|
@@ -66,6 +75,7 @@ ActiveRecord::Schema.define(version: 2019_06_12_112813) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role"
   end
 
 end

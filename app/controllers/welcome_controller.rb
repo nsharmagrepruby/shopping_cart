@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
-  before_action :redirect_if_user_login
+  before_action :already_login
+  
   def index
   end
 end

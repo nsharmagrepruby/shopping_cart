@@ -1,3 +1,17 @@
-<h1> create New Address </h1>
-<%= render 'address_form' %>
-<%= link_to 'User home', user_path(current_user) %>
+<%= form_with(model: [ @user, @address], url: user_addresses_path, local: true)  do |form| %>
+  <p>
+    <%= form.label :house_number %><br>
+    <%= form.text_field :house_number %>
+  </p>
+  <p>
+    <%= form.label :area %><br>
+    <%= form.text_field :area %>
+  </p>
+  <p>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %>
+  </p>
+
+    <%= form.submit %>
+  </p>
+<% end %> 

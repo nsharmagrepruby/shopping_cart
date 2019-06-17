@@ -1,7 +1,7 @@
-<%= form_with(model: [ @user, @address], local: true) do |form| %>
+<%= form_with(model: [current_user, @address], local: true) do |form| %>
   <p>
-    <%= form.label :house_num %><br>
-    <%= form.text_field :house_num %>
+    <%= form.label :house_number %><br>
+    <%= form.text_field :house_number %>
   </p>
   <p>
     <%= form.label :area %><br>

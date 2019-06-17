@@ -9,10 +9,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def redirect_if_user_login
-    if current_user
-      redirect_to user_path(current_user.id)
-    end
+  def already_login
+    redirect_to user_path(current_user) if current_user
   end
 
   def check_authorization_user

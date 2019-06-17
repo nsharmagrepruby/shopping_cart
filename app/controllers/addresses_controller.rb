@@ -1,42 +1,47 @@
 class AddressesController < ApplicationController
   before_action :check_authorization_user
-
+  before_action :get_address, only: [:edit, :update, :destroy]
+  
   def index
-    @user = User.find_by(id: params[:user_id])
   end
 
   def new
-    @user = User.find_by(id: params[:user_id])
     @address = Address.new
   end
 
   def edit
-    @user = User.find_by(id: params[:user_id])
-    @address = Address.find_by(id: params[:id])
   end
 
   def create
-    @user = User.find_by(id: params[:user_id])
-    address = @user.addresses.create(address_params)
-    redirect_to user_addresses_path(@user)
+    if current_user.addresses.create(address_params)
+      redirect_to user_addresses_path(current_user)
+    else
+      render 'new'
+    end
   end
 
   def update
-    @address = Address.find(params[:id])
     if @address.update(address_params)
-      redirect_to user_addresses_path(params[:user_id])
+      redirect_to user_addresses_path(current_user)
     else
       render 'edit'
     end
   end
 
   def destroy
-    Address.find_by(id: params[:id]).destroy
-    redirect_to user_addresses_path(params[:user_id])
+    if @address.destroy      
+      redirect_to user_addresses_path(params[:user_id])
+    else
+      render plain: 'Address is not deleted or not present previoulsy'
+    end
   end
 
   private
   def address_params
-    params.require(:address).permit(:house_num, :area, :city)
+    params.require(:address).permit(:house_number, :area, :city)
+  end
+
+  def get_address
+    @address = Address.find_by(id: params[:id])
   end
 end

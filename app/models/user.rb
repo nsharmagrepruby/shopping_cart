@@ -1,11 +1,17 @@
 class User < ApplicationRecord
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :email, presence: true, uniqueness: true
-  validates :password, presence: true
+  before_save :default_values
   
   has_secure_password
+  
+  validates :first_name, :last_name,:password, presence: true
+  validates :email, presence: true, uniqueness: true
+  
   has_many :addresses
-  has_one :role
+  has_one :cart
   has_one :shop_owner
+  enum role: ['customer', 'shop_owner']
+
+  def default_values
+    self.role ||= 1
+  end
 end

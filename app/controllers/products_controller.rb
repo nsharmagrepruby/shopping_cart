@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
  
   def index
     @products = Product.all
+    @cart_product = CartProduct.new
   end
   
   def new
@@ -11,11 +12,12 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @products = Product.where(:shop_owner_id => shop_owner.id)
+    @products = Product.where(shop_owner_id: shop_owner.id)
   end
 
   def create
-    @product = Product.new(product_params.merge(get_shop_and_owner_param))
+    debugger
+    @product = Product.new(product_params.merge(get_shop_and_owner_params))
     if @product.save
       render plain: params[:product].inspect
     else 
@@ -36,8 +38,8 @@ class ProductsController < ApplicationController
     current_user.shop_owner.shop
   end
 
-  def get_shop_and_owner_param
-    return { shop_owner_id: shop_owner.id, shop_id: shop.id }
+  def get_shop_and_owner_params
+    { shop_owner_id: shop_owner.id, shop_id: shop.id }
   end
 end
 
