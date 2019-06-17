@@ -18,6 +18,10 @@ class CartsController < ApplicationController
   end
 
   def current_cart
-    current_user.cart ? current_user.cart : current_user.cart.build  
+    if current_user.cart 
+     current_user.cart 
+    else
+      current_user.cart = Cart.new
+    end
   end
 end

@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name,:password, presence: true
   validates :email, presence: true, uniqueness: true
   
+  has_many :orders
   has_many :addresses
   has_one :cart
   has_one :shop_owner
