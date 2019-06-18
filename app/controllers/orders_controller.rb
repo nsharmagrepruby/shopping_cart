@@ -4,6 +4,8 @@ def index
   end   
 
   def show
+    debugger
+    render plain: params[:id].inspect
   end
 
   def create
@@ -15,6 +17,7 @@ def index
     end
 
     current_user.cart.destroy
+    redirect_to user_order_path(current_user, @order)
   end
 
   private

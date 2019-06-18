@@ -16,7 +16,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-    debugger
     @product = Product.new(product_params.merge(get_shop_and_owner_params))
     if @product.save
       render plain: params[:product].inspect

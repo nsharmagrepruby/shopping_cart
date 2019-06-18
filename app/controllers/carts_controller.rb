@@ -7,9 +7,13 @@ class CartsController < ApplicationController
     @cart = current_cart
   end
 
+  def show
+  end
+  
   def create
     current_cart.cart_products.new(cart_product_params)
-    current_cart.save
+    flash[:notice] = "Post successfully created" unless current_cart.save
+    redirect_to user_products_path
   end
 
   private
