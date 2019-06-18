@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
+      UserJob.set(wait: 1.hour).perform_later(user)
       redirect_to user, notice: "Logged in!"
     else
       flash.now[:alert] = "Email or password is invalid"

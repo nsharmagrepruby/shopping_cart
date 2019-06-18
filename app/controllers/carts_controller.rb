@@ -1,8 +1,8 @@
 class CartsController < ApplicationController
-
+  before_action :check_authorization_user
+  
   def new
   end
-
   
   def show
     @cart = current_cart

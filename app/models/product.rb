@@ -6,4 +6,6 @@ class Product < ApplicationRecord
 
   belongs_to :shop_owner
   belongs_to :shop
+
+  has_many_attached :images
 end

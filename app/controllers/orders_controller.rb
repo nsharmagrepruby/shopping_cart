@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
-def index
+  before_action :check_authorization_user
+  
+  def index
     render plain: '123'
   end   
 

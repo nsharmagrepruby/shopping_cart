@@ -8,6 +8,8 @@
     <th>Description</th>
     <th>Price</th>
     <th>Quantity</th>
+    <th>image</th>
+    
   </tr>
   <% @products.each do |product| %>
     <tr>
@@ -15,6 +17,12 @@
       <th><%= product.description %></th>
       <th><%= product.price %></th>
       <th><%= product.quantity %></th>
+      <th><% if product.images.attached? %>
+            <% product.images.each do |image| %>
+              <%= image_tag(image) %>
+            <% end %>
+          <% end %>
+      </th>
       <th>
 
         <%= form_with model: @cart_product, url: user_carts_path ,local: true do |form|  %>

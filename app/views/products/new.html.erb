@@ -29,6 +29,10 @@ Create new Product
     <%= form.label :quantity %><br>
     <%= form.number_field :quantity %>
   </p>
+  <p>
+    <%= form.label "Photos" %><br>
+    <%= form.file_field :images, multiple: true %>
+  </p>
     <%= form.submit %>
   </p>
 <% end %>
