@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :addresses
   has_one :cart
   has_one :shop_owner
+
   enum role: ['customer', 'shop_owner']
 
   def default_values

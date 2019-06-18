@@ -44,4 +44,8 @@ class AddressesController < ApplicationController
   def get_address
     @address = Address.find_by(id: params[:id])
   end
+
+  def get_address
+    @address = Address.find_by(id: params[:id])
+  end
 end
