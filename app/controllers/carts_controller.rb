@@ -12,8 +12,8 @@ class CartsController < ApplicationController
   end
   
   def create
-    current_cart.cart_products.new(cart_product_params)
-    flash[:notice] = "Post successfully created" unless current_cart.save
+    cart_product = current_cart.cart_products.new(cart_product_params)
+    flash[:cart_product] = cart_product.errors.messages unless cart_product.save
     redirect_to user_products_path
   end
 
@@ -23,10 +23,6 @@ class CartsController < ApplicationController
   end
 
   def current_cart
-    if current_user.cart 
-     current_user.cart 
-    else
-      current_user.cart = Cart.new
-    end
+    current_user.cart ||= (current_user.cart = Cart.new)
   end
 end

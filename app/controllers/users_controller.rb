@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      UserJob.perform_later(user)
+      UserJob.perform_later(@user)
       redirect_to @user
     else 
       render 'new'
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       current_user.update(user_params)
       redirect_to user_path(current_user)
     else        
-      flash[:notice] = 'password is not same'
+      flash[:confirm_password] = 'password and confirm password must be same'
       redirect_to edit_user_path
     end
   end

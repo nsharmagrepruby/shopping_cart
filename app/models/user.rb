@@ -14,6 +14,6 @@ class User < ApplicationRecord
   enum role: ['customer', 'shop_owner']
 
   def default_values
-    self.role ||= 1
+    self.role ||= :customer
   end
 end

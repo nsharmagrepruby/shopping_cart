@@ -1,7 +1,7 @@
 <%= form_with model: @user, local: true do |form|  %>
     Update Password for <h1><%= @user.email %></h1>
-  <% if flash[:notice] %>
-    <div class="notice"><%= flash[:notice] %></div>
+  <% if flash[:confirm_password] %>
+    <div class="confirm_password"><%= flash[:confirm_password] %></div>
   <% end %>
     <p>
         <%= form.label :password %>

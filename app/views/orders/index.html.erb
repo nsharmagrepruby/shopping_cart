@@ -1,0 +1,11 @@
+<table>
+  <tr><th>crated at</th></tr>
+  <tr><th>Total Products</th></tr>
+  <tr><th>Total Money</th></tr>
+  
+  <% @orders.each do |order| %>
+    <%= order.created_at %>
+    <%= OrderProduct.where(order_id: order).count %>
+
+  <% end %>
+</table>

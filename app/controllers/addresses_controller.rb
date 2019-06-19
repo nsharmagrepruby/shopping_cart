@@ -9,7 +9,7 @@ class AddressesController < ApplicationController
     @address = Address.new
   end
 
-  def edit
+  def edits
   end
 
   def create

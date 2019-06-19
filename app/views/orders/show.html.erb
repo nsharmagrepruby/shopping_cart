@@ -1,0 +1,18 @@
+<table border="1">  
+  <tr>
+    <th>name</th>
+    <th>Description</th>
+    <th>Quantity</th>
+    <th>price</th>
+  </tr>
+  <% @order.order_products.each do |order_product| %>
+    <tr>
+      <th><%= order_product.product.name %></th>
+      <th><%= order_product.product.description %></th>
+      <th><%= order_product.quantity %></th>
+      <th><%= order_product.price %></th>
+     </tr>
+  <% end %>
+</table>
+
+Final Price is <%= @order.final_price %>
