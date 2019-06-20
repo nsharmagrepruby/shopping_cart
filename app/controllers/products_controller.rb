@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :check_authorization_user
+  before_action :check_customer, only: [:create, :new]
  
   def index
     @products = Product.all
@@ -7,13 +8,12 @@ class ProductsController < ApplicationController
   end
   
   def new
-    redirect_to products_path unless shop_owner.present?
     @product = Product.new
   end
 
   def show
     @product = Product.find_by_id(params[:id])
-    render plain: "product is not available" unless @product
+    render plain: "product is not available" if @product.blank?
   end
   
   def create
@@ -27,7 +27,8 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(extra_params)
+    params.require(:product).permit([
+      :name, :description, :price, :quantity, images: []])
   end
 
   def shop_owner
@@ -35,15 +36,15 @@ class ProductsController < ApplicationController
   end
 
   def shop
-    current_user.shop_owner.shop
+    shop_owner.shop
   end
 
   def get_shop_and_owner_params
     {shop_owner_id: shop_owner.id, shop_id: shop.id}
   end
 
-  def extra_params
-    [:name, :description, :price, :quantity, images: []]
+  def check_customer
+    redirect_to products_path if current_user.customer?
   end
 end
 

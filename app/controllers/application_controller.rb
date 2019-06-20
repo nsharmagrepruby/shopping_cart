@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   def already_login
-    redirect_to user_path(current_user) if current_user
+    redirect_to user_path(current_user) if current_user.present?
   end
 
   def check_authorization_user
-    redirect_to root_path unless current_user
+    redirect_to root_path if current_user.blank?
   end
 end

@@ -4,8 +4,9 @@ class Order < ApplicationRecord
   has_many :order_products
 
   private
+
   def add_order_product
-    current_user = self.user
+    current_user = user
     current_user.cart.cart_products.each do |cart_product|
       cart_product_to_order_product(cart_product)
     end
@@ -14,17 +15,13 @@ class Order < ApplicationRecord
   end
 
   def cart_product_to_order_product(cart_product)
-    order_product = self.order_products.new
-    order_product.product = cart_product.product
-    order_product.price = cart_product.product.price
-    order_product.quantity = cart_product.quantity
-  end
+    order_products.new(cart_product.product.attributes.slice(
+      :product_id, :quantity, :price))
+    end
 
   def final_price_order
-    final_price_order = 0
-    self.order_products.each do |order_product|
-      final_price_order += order_product.price * order_product.quantity
+    order_products.each_with_object(0) do |order_product, final_price|
+      final_price += order_product.price * order_product.quantity
     end
-    final_price_order
   end
 end

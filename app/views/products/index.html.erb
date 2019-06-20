@@ -1,6 +1,6 @@
 <h1>Product list</h1>
-<% if flash[:cart_product] %>
-  <div class="cart"><%= flash[:cart_product].values %></div>
+<% if flash[:messages] %>
+  <div class="cart"><%= flash[:messages].values %></div>
 <% end %>
 <table border="1">
   <tr>

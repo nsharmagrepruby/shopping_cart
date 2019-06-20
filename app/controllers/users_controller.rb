@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :check_authorization_user
-
+  before_action :add_user_from_current_user, only: [:show, :edit]
+  
   def new
     @user = User.new
   end
@@ -9,22 +10,18 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      UserJob.perform_later(@user)
+      SendMailJob.perform_later(@user)
       redirect_to @user
     else 
       render 'new'
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-    @user = current_user
-  end
+  def edit; end
 
   def update
-     @user = current_user
     if params[:user][:password] == params[:user][:password_confirmation]
       current_user.update(user_params)
       redirect_to user_path(current_user)
@@ -37,5 +34,9 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :password)
+  end
+
+  def add_user_from_current_user
+    @user = current_user
   end
 end

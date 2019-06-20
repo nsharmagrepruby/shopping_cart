@@ -1,6 +1,5 @@
 class WelcomeController < ApplicationController
   before_action :already_login
   
-  def index
-  end
+  def index; end
 end

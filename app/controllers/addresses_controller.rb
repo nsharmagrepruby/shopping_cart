@@ -2,8 +2,7 @@ class AddressesController < ApplicationController
   before_action :check_authorization_user
   before_action :get_address, only: [:edit, :update, :destroy]
   
-  def index
-  end
+  def index; end
 
   def new
     @address = Address.new
@@ -16,7 +15,7 @@ class AddressesController < ApplicationController
   def create
     @address = current_user.addresses.new(address_params)
     if @address.save
-      redirect_to addresses_path()
+      redirect_to addresses_path
     else
       render 'new'
     end
@@ -24,15 +23,15 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to addresses_path()
+      redirect_to addresses_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    if @address.destroy      
-      redirect_to addresses_path()
+    if @address.destroy && @address.destroyed?
+      redirect_to addresses_path
     else
       render plain: 'Address is not deleted'
     end
@@ -41,10 +40,6 @@ class AddressesController < ApplicationController
   private
   def address_params
     params.require(:address).permit(:house_number, :area, :city)
-  end
-
-  def get_address
-    @address = Address.find_by(id: params[:id])
   end
 
   def get_address
