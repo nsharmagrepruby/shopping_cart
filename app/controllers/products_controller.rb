@@ -7,18 +7,19 @@ class ProductsController < ApplicationController
   end
   
   def new
-    redirect_to user_products_path unless shop_owner.present?
+    redirect_to products_path unless shop_owner.present?
     @product = Product.new
   end
 
   def show
-    @products = Product.where(shop_owner_id: shop_owner.id)
+    @product = Product.find_by_id(params[:id])
   end
-
+  
   def create
     @product = Product.new(product_params.merge(get_shop_and_owner_params))
     if @product.save
-      render plain: params[:product].inspect
+      debugger
+      redirect_to @product
     else 
       render 'new'
     end
@@ -40,5 +41,6 @@ class ProductsController < ApplicationController
   def get_shop_and_owner_params
     { shop_owner_id: shop_owner.id, shop_id: shop.id }
   end
+
 end
 

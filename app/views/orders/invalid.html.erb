@@ -1,0 +1,13 @@
+<div id="error_explanation">
+    <% @order.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+
+    <% @order.order_products.each do |order_products| %>
+      <% if order_products.errors.any? %>
+        <li><%= order_products.errors.full_messages %> 
+          for product name
+          <%= order_products.product.name %></li>
+      <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,29 @@
+<h1>Product of your shop</h1>
+<table border="1">
+  <tr>
+
+    <td>Name</td>
+    <td>Description</td>
+    <td>Price</td>
+    <td>quantiy</td>
+    <td>Image</td>
+    <td>Added By </td>
+  </tr>
+  <% @products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= product.description %></td>
+      <td><%= product.price %></td>
+      <td><%= product.quantity %></td>
+      <td>
+        <% if product.images.attached? %>
+          <%  product.images.each do |image| %>
+            <%= image_tag(image, style: "width:150px") %>
+          <% end %>
+        <% end %>  
+      </td>
+
+      <td><%= product.shop_owner.user.first_name %></td>
+  </tr>
+  <% end %>
+</table>

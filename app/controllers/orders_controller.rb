@@ -11,7 +11,10 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.new
-    @order.save
-    redirect_to user_order_path(current_user, @order) 
-  end  
+    if @order.save
+      redirect_to order_path(@order) 
+    else
+      render 'invalid'
+    end
+  end
 end

@@ -3,4 +3,8 @@
   <th><%= product.description %></th>
   <th><%= product.price %></th>
   <th><%= product.quantity %></th>
+  <% if product.images.attached? %>
+    <% product.images.each do |image| %>
+    <%= image_tag(image, style: "width:150px") %>
+  <% end %>  
 </tr>

@@ -5,12 +5,13 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   
-  resources :users, only: [:create, :new, :edit, :show, :update] do
-    resources :addresses, only: [:index, :new, :create, :update, :destroy, :edit]
-    resources :products, only: [:index, :new, :show, :create]
-    resources :carts, only: [:new, :create, :edit, :show]
-    resources :cart_products, only: [:edit, :destroy]
-    resources :orders, only: [:index, :show, :create]
-  end
+  resources :users, except: [:index, :destroy]
+  resources :products, only: [:index, :new, :show, :create]
+  resources :carts, only: [:new, :create, :edit, :show]
+  resources :cart_products, only: [:edit, :destroy]
+  resources :orders, only: [:index, :show, :create]
+  resources :addresses, except: [:show]
   resources :sessions, only: [:new, :create, :destroy]
+  
+  get 'shops/products', to: 'shops#products'
 end

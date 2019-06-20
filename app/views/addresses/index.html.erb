@@ -11,8 +11,8 @@ Your Addresses are :
       <td><%= address.house_number %></td>
       <td><%= address.area %></td>
       <td><%= address.city %></td>
-      <td><%= link_to 'edit address', edit_user_address_path(current_user, address) %> </td>
-      <td><%= link_to 'delete', user_address_path(current_user, address),
+      <td><%= link_to 'edit address', edit_address_path(current_user, address) %> </td>
+      <td><%= link_to 'delete', address_path(address),
         method: :delete, data: { confirm: 'Are you sure?' }  %> </td>
 
     </tr>

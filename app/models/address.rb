@@ -1,7 +1,5 @@
 class Address < ApplicationRecord
-  validates :house_num, presence: true
-  validates :area, presence: true
-  validates :city, presence: true
+  validates :house_number, :area, :city, presence: true
 
   belongs_to :user
 end

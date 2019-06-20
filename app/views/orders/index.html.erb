@@ -1,11 +1,17 @@
-<table>
-  <tr><th>crated at</th></tr>
-  <tr><th>Total Products</th></tr>
-  <tr><th>Total Money</th></tr>
+<table border="1">
+  <tr>
+    <th>crated at</th>
+    <th>Total Products</th>
+    <th>Total Money</th>
+  </tr>
   
   <% @orders.each do |order| %>
-    <%= order.created_at %>
-    <%= OrderProduct.where(order_id: order).count %>
+   <tr>
+    <td><%= order.created_at %></td>
+    <td><%= order.order_products.count %></td>
+    <td><%= order.final_price %></td>
+    <td><%= link_to 'know Order in detail', order_path(order) %></td>
+  </tr>
 
   <% end %>
 </table>

@@ -1,4 +1,4 @@
-<% if current_user.cart %>
+<% if current_user.cart && current_user.cart.cart_products.exists? %>
   Cart For
   <%= current_user.first_name %>
   <%= current_user.last_name %>
@@ -15,12 +15,14 @@
       <td><%= cart_product.product.description %></td>
       <td><%= cart_product.product.price %></td>
       <td><%= cart_product.quantity %></td>
-      <td><%= link_to 'edit product',  edit_user_cart_product_path(current_user, cart_product) %> </td>
-      <td><%= link_to 'delete product',  user_cart_product_path(current_user, cart_product), method: :delete, data: { confirm: 'Are you sure?' }  %> 
+      <td><%= link_to 'delete product', cart_product_path(cart_product), method:
+      :delete, data: { confirm: 'Are you sure?' } %> 
       </td>
     </tr>
   <% end %>
 
-  <%= link_to 'Confrim order', user_orders_path(current_user), method: :post %>
+  <%= link_to 'Confrim order', orders_path(current_user), method: :post %>
 </table>
+<% else %>
+  Your cart is empty
 <% end %>

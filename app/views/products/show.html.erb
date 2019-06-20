@@ -1,0 +1,23 @@
+<table border="1">
+  <tr>
+
+    <td>Name</td>
+    <td>Description</td>
+    <td>Price</td>
+    <td>quantiy</td>
+    <td>Image</td>
+  </tr>
+  <tr>
+    <td><%= @product.name %></td>
+    <td><%= @product.description %></td>
+    <td><%= @product.price %></td>
+    <td><%= @product.quantity %></td>
+    <td>
+      <% if @product.images.attached? %>
+        <%  product.images.each do |image| %>
+          <%= image_tag(image, style: "width:150px") %>
+        <% end %>
+      <% end %>  
+    </td>
+  </tr>
+</table>

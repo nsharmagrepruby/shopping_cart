@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
 
   def create
     if current_user.addresses.create(address_params)
-      redirect_to user_addresses_path(current_user)
+      redirect_to addresses_path()
     else
       render 'new'
     end
@@ -22,7 +22,7 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to user_addresses_path(current_user)
+      redirect_to addresses_path()
     else
       render 'edit'
     end
@@ -30,7 +30,7 @@ class AddressesController < ApplicationController
 
   def destroy
     if @address.destroy      
-      redirect_to user_addresses_path(params[:user_id])
+      redirect_to addresses_path()
     else
       render plain: 'Address is not deleted or not present previoulsy'
     end
