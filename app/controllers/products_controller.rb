@@ -13,12 +13,12 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find_by_id(params[:id])
+    render plain: "product is not available" unless @product
   end
   
   def create
     @product = Product.new(product_params.merge(get_shop_and_owner_params))
     if @product.save
-      debugger
       redirect_to @product
     else 
       render 'new'
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :description, :price, :quantity, images: [])
+    params.require(:product).permit(extra_params)
   end
 
   def shop_owner
@@ -39,8 +39,11 @@ class ProductsController < ApplicationController
   end
 
   def get_shop_and_owner_params
-    { shop_owner_id: shop_owner.id, shop_id: shop.id }
+    {shop_owner_id: shop_owner.id, shop_id: shop.id}
   end
 
+  def extra_params
+    [:name, :description, :price, :quantity, images: []]
+  end
 end
 

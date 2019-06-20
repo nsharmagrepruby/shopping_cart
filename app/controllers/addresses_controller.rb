@@ -9,11 +9,13 @@ class AddressesController < ApplicationController
     @address = Address.new
   end
 
-  def edits
+  def edit
+    @address = Address.find_by(id: params[:id])
   end
 
   def create
-    if current_user.addresses.create(address_params)
+    @address = current_user.addresses.new(address_params)
+    if @address.save
       redirect_to addresses_path()
     else
       render 'new'
@@ -32,7 +34,7 @@ class AddressesController < ApplicationController
     if @address.destroy      
       redirect_to addresses_path()
     else
-      render plain: 'Address is not deleted or not present previoulsy'
+      render plain: 'Address is not deleted'
     end
   end
 

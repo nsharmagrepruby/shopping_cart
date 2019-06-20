@@ -14,7 +14,7 @@
     <td><%= @product.quantity %></td>
     <td>
       <% if @product.images.attached? %>
-        <%  product.images.each do |image| %>
+        <%  @product.images.each do |image| %>
           <%= image_tag(image, style: "width:150px") %>
         <% end %>
       <% end %>  
