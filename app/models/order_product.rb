@@ -1,10 +1,8 @@
 class OrderProduct < ApplicationRecord
-  validate :check_order_quantity
-  
   belongs_to :order
   belongs_to :product
-
-
+  
+  validate :check_order_quantity
 
   def check_order_quantity
     if self.quantity <= self.product.quantity

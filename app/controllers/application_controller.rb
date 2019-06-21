@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     redirect_to user_path(current_user) if current_user.present?
   end
 
-  def check_authorization_user
+  def check_authenticate_user
     redirect_to root_path if current_user.blank?
   end
 end

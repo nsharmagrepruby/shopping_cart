@@ -5,7 +5,7 @@ class CartProduct < ApplicationRecord
   validates :quantity, presence: { message: "must be given" }
 
   def update_quantity!(quantity)
-    self.update(:quantity, self.quantity + quantity)
+    self.update_attribute(:quantity, self.quantity + quantity)
   end
 end
 

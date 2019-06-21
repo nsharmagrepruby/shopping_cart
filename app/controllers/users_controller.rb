@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_authorization_user
+  before_action :check_authenticate_user, except: [:new, :create]
   before_action :add_user_from_current_user, only: [:show, :edit]
   
   def new

@@ -3,8 +3,18 @@
   <th><%= product.description %></th>
   <th><%= product.price %></th>
   <th><%= product.quantity %></th>
-  <% if product.images.attached? %>
-    <% product.images.each do |image| %>
-    <%= image_tag(image, style: "width:150px") %>
-  <% end %>  
+  <th><% if product.images.attached? %>
+        <% product.images.each do |image| %>
+          <%= image_tag(image, style: "width:150px") %>
+        <% end %>
+      <% end %>
+  </th>
+  <th>
+    <%= form_with model: @cart_product, url: carts_path ,local: true do |form|  %>
+      <%= form.label :quantity %><br>
+      <%= form.number_field :quantity, reqired: true %>
+      <%= form.hidden_field :product_id, value: product.id %>
+      <%= form.submit "add to cart" %>
+    <% end %>
+  </th>
 </tr>

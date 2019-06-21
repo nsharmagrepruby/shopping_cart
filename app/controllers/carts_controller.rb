@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :check_authorization_user
+  before_action :check_authenticate_user
   
   def new; end
   
@@ -10,8 +10,8 @@ class CartsController < ApplicationController
   def show; end
   
   def create
-    if past_prdoduct.present?
-      update_quantity
+    if existed_product.present?
+      update_quantity    
     else
       @cart_product = current_cart.cart_products.new(cart_product_params)
       flash[:messages] = @cart_product.errors.messages unless @cart_product.save
@@ -30,7 +30,7 @@ class CartsController < ApplicationController
   end
 
   def update_quantity
-    past_prdoduct.update_quantity!(added_quantity)
+    existed_product.update_quantity!(added_quantity)
   end
 
   def product_id
@@ -41,7 +41,7 @@ class CartsController < ApplicationController
     params[:cart_product][:quantity].to_i
   end 
 
-  def past_prdoduct
+  def existed_product
     current_cart.cart_products.find_by(product_id: product_id)
   end
 end

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :check_authorization_user
+  before_action :check_authenticate_user
   before_action :check_customer, only: [:create, :new]
  
   def index

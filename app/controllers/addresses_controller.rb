@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_action :check_authorization_user
+  before_action :check_authenticate_user
   before_action :get_address, only: [:edit, :update, :destroy]
   
   def index; end
@@ -9,7 +9,7 @@ class AddressesController < ApplicationController
   end
 
   def edit
-    @address = Address.find_by(id: params[:id])
+    @address = current_user.addresses.find_by(id: params[:id])
   end
 
   def create

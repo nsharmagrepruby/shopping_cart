@@ -1,12 +1,12 @@
 class OrdersController < ApplicationController
-  before_action :check_authorization_user
+  before_action :check_authenticate_user
   
   def index
     @orders = current_user.orders 
   end   
 
   def show
-    @order = Order.find_by(id: params[:id])
+    @order = current_user.orders.find_by(id: params[:id])
     render plain: "product is not available" if @order.blank?
   end
 
