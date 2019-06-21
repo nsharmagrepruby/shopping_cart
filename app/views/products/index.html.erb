@@ -1,6 +1,6 @@
 <h1>Product list</h1>
 <% if flash[:messages] %>
-  <div class="cart"><%= flash[:messages].values %></div>
+  <div ><%= flash[:messages].values %></div>
 <% end %>
 <table border="1">
   <tr>
@@ -16,5 +16,26 @@
   </tbody>
 </table>
 
-<%= render 'shared/show_cart' %>
+<% if current_user.cart && current_user.cart.cart_products.exists? %>
+  Cart For
+  <%= current_user.first_name %>
+  <%= current_user.last_name %>
+  <table id="carts">
+    <tr> 
+      <th>Name</th>
+      <th>Description</th>
+      <th>price</th>
+      <th>Quantity</th>
+    </tr>
+    
+  <tbody>
+    <%= render partial: 'cart_product', collection: current_user.cart.cart_products %>
+  </tbody>
+
+  <%= link_to 'Confrim order', orders_path(current_user), method: :post %>
+</table>
+<% else %>
+  Your cart is empty
+<% end %>
+
 </table>

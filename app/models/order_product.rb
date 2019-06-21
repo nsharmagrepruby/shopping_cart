@@ -4,6 +4,8 @@ class OrderProduct < ApplicationRecord
   
   validate :check_order_quantity
 
+  private
+  
   def check_order_quantity
     if self.quantity <= self.product.quantity
       self.product.quantity -= self.quantity 

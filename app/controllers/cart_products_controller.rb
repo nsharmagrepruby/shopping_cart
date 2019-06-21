@@ -5,10 +5,13 @@ class CartProductsController < ApplicationController
   end
   
   def destroy
-    cart_product = CartProduct.find_by_id(params[:id])
+    cart_product = current_user.cart.cart_products.find_by_id(params[:id])
+    debugger
     cart_product.destroy
     if cart_product.destroyed?
-      redirect_to products_path
+      respond_to do |format|
+        format.js
+      end
     elsif
       render plain: "product is not deleted"
     end

@@ -13,6 +13,8 @@ class User < ApplicationRecord
   
   enum role: ['customer', 'shop_owner']
 
+  private
+  
   def set_role
     self.role ||= :customer
   end

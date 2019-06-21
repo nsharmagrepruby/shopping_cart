@@ -11,12 +11,17 @@ class CartsController < ApplicationController
   
   def create
     if existed_product.present?
-      update_quantity    
+      update_quantity
+      @cart_product = existed_product
     else
       @cart_product = current_cart.cart_products.new(cart_product_params)
       flash[:messages] = @cart_product.errors.messages unless @cart_product.save
     end
-    redirect_to products_path
+
+    respond_to do |format|
+      format.html { redirect_to products_path }
+      format.js
+    end
   end
 
   private

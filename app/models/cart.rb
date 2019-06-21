@@ -4,9 +4,8 @@ class Cart < ApplicationRecord
   belongs_to :user
 
   def clean
-    cart_products.destroy_all
-    if cart_products.exists?
-      self.errors.add(:cart_id, "cart not deleted")
+    cart_products.each do |cart_product|
+      cart_product.destroy
     end
   end
 end
