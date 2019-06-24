@@ -28,9 +28,8 @@
       <th>Quantity</th>
     </tr>
     
-  <tbody>
+
     <%= render partial: 'cart_product', collection: current_user.cart.cart_products %>
-  </tbody>
 
   <%= link_to 'Confrim order', orders_path(current_user), method: :post %>
 </table>

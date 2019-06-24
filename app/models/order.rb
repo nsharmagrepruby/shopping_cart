@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   has_many :order_products
   belongs_to :user
   
-  after_initialize :add_order_product
+  before_save :add_order_product
 
   private
 
@@ -11,7 +11,7 @@ class Order < ApplicationRecord
       cart_product_to_order_product(cart_product)
     end
     self.final_price = final_price_order
-    user.cart.clean
+    user.cart.destroy
   end
 
   def cart_product_to_order_product(cart_product)

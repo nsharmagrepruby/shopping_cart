@@ -17,11 +17,6 @@ class CartsController < ApplicationController
       @cart_product = current_cart.cart_products.new(cart_product_params)
       flash[:messages] = @cart_product.errors.messages unless @cart_product.save
     end
-
-    respond_to do |format|
-      format.html { redirect_to products_path }
-      format.js
-    end
   end
 
   private

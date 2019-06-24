@@ -6,11 +6,13 @@ class OrdersController < ApplicationController
   end   
 
   def show
-    @order = current_user.orders.find_by(id: params[:id])
+    @order = Order.find_by(id: params[:id])
+    debugger  
     render plain: "product is not available" if @order.blank?
   end
 
   def create
+    debugger
     @order = current_user.orders.new
     if @order.save
       redirect_to order_path(@order) 
