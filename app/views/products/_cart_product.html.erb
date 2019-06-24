@@ -1,8 +1,8 @@
-<tr >
-  <td><%= cart_product.product.name %></td>
+<tr id="<%= dom_id(cart_product) %>">
+    <td><%= cart_product.product.name %></td>
     <td><%= cart_product.product.description %></td>
     <td><%= cart_product.product.price %></td>
-    <td><%= cart_product.quantity %></td>
+    <td id="quantity" ><%= cart_product.quantity %></td>
     <td><%= link_to 'delete product', cart_product_path(cart_product), method:
       :delete, data: { confirm: 'Are you sure?', remote: true } , class: "delete"%>
   </td>

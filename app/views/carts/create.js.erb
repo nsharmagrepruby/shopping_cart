@@ -1,2 +1,14 @@
-debugger
-$('#carts').append("<%= j(render 'products/cart_product', cart_product: @cart_product)%>");
+<% def product_name %>
+<%  @cart_product.product.name %>
+<% end %>
+
+<% if flash[:messages] == "update_quantity" %>
+  toastr.info('products updated <%= product_name %>')
+  $('#cart_product_<%= @cart_product.id %> #quantity')
+  .html('<%= @cart_product.quantity %>')
+<% elsif flash[:messages][:quantity][0] == "must be given" %>
+  toastr.warning('You added 0 quantity for products <%= product_name %>')
+<% else %>
+  $('#carts').append("<%= j(render 'products/cart_product', cart_product: @cart_product)%>");
+  toastr.info('products added')
+<% end %>

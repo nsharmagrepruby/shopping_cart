@@ -13,6 +13,7 @@ class CartsController < ApplicationController
     if existed_product.present?
       update_quantity
       @cart_product = existed_product
+      flash[:messages] = "update_quantity"
     else
       @cart_product = current_cart.cart_products.new(cart_product_params)
       flash[:messages] = @cart_product.errors.messages unless @cart_product.save

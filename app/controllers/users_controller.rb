@@ -19,7 +19,9 @@ class UsersController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    debugger
+  end
 
   def update
     if params[:user][:password] == params[:user][:password_confirmation]
